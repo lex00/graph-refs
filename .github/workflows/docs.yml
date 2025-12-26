@@ -34,7 +34,7 @@ jobs:
 
       - name: Build API docs
         run: |
-          uv run pdoc \
+          PYTHONPATH=src uv run pdoc \
             graph_refs \
             --footer-text "Typed graph references for Python dataclasses" \
             -o docs/api/
