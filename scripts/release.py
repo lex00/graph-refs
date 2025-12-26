@@ -33,7 +33,8 @@ def get_changelog_section(version: str) -> str:
 
     # Pattern to match version section
     # Matches ## [X.Y.Z] - YYYY-MM-DD or ## [X.Y.Z]
-    pattern = rf"## \[{re.escape(version)}\][^\n]*\n(.*?)(?=\n## \[|\Z)"
+    # Stops at next version header OR link definitions at end of file
+    pattern = rf"## \[{re.escape(version)}\][^\n]*\n(.*?)(?=\n## \[|\n\[[\w-]+\]:|\Z)"
     match = re.search(pattern, content, re.DOTALL)
 
     if not match:
