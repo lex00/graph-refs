@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Circular/self-referential classes
 - Type checker compatibility (mypy, pyright)
 - Zero runtime dependencies
-- Python 3.10+ support
+- Python 3.11+ support
 - Comprehensive test suite (61 tests, 93% coverage)
 - Google-style docstrings throughout
 - pdoc-generated API documentation
