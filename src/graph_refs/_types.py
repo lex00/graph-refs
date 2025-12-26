@@ -137,7 +137,7 @@ class _AttrMeta(type):
         Raises:
             TypeError: If args is not a tuple of exactly two elements.
         """
-        if not isinstance(args, tuple) or len(args) != 2:
+        if not isinstance(args, tuple) or len(args) != 2:  # pyright: ignore[reportUnnecessaryIsInstance]
             raise TypeError("Attr requires exactly two arguments: Attr[T, 'name']")
         return _GenericAlias(cls, args)
 
@@ -269,7 +269,7 @@ class _RefDictMeta(type):
         Raises:
             TypeError: If args is not a tuple of exactly two elements.
         """
-        if not isinstance(args, tuple) or len(args) != 2:
+        if not isinstance(args, tuple) or len(args) != 2:  # pyright: ignore[reportUnnecessaryIsInstance]
             raise TypeError("RefDict requires exactly two arguments: RefDict[K, V]")
         return _GenericAlias(cls, args)
 
@@ -443,8 +443,7 @@ class _GenericAlias:
         """
         if isinstance(other, _GenericAlias):
             return (
-                self.__origin__ == other.__origin__
-                and self.__args__ == other.__args__
+                self.__origin__ == other.__origin__ and self.__args__ == other.__args__
             )
         return False
 
