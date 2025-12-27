@@ -108,8 +108,8 @@ Exports:
         - `get_dependencies`: Compute dependency graph
 
 See Also:
-    - `PHILOSOPHY.md`: Design principles behind this library
-    - `docs/PEP_TYPING.md`: PEP proposal for stdlib inclusion
+    - `docs/RATIONALE.md`: Design principles and rationale
+    - `docs/PATTERN.md`: Declarative dataclass pattern guide
 """
 
 from graph_refs._introspection import (

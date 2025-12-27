@@ -78,7 +78,7 @@ When filing a bug report, include:
 
 Before proposing a feature:
 
-1. Check if it aligns with the [design philosophy](PHILOSOPHY.md)
+1. Check if it aligns with the [design rationale](docs/RATIONALE.md)
 2. Consider if it belongs in graph-refs or in a framework using it
 3. Ensure it maintains zero-dependency constraint
 4. Verify type checker compatibility is feasible
@@ -252,7 +252,7 @@ Update `CHANGELOG.md` when making releases:
 
 - Open a GitHub issue for bugs or features
 - Start a GitHub discussion for design questions
-- Read [PHILOSOPHY.md](PHILOSOPHY.md) for design rationale
+- Read [docs/RATIONALE.md](docs/RATIONALE.md) for design rationale
 
 ## License
 

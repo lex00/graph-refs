@@ -337,6 +337,73 @@ role_arn: Attr[Role, "Arn"] = MyRole.Arn  # Serializes to {"GetAtt": ["MyRole", 
 1. **Conciseness**: `RefList[T]` vs `list[Ref[T]]`
 2. **Signaling**: Indicates the decorator should process elements for implicit conversion
 
+## Design Principles
+
+### Zero Runtime Cost
+
+Type markers are nearly invisible at runtime:
+
+```python
+class Ref(Generic[T]):
+    __slots__ = ()  # No instance data
+```
+
+All the value is at development time (type checking) and framework time (introspection). There's no runtime validation or overhead.
+
+### Minimal Surface Area
+
+Fewer, well-designed primitives are better than many specialized ones:
+
+| Type | Purpose |
+|------|---------|
+| `Ref[T]` | Reference to T |
+| `Attr[T, "name"]` | Reference to T's attribute |
+| `RefList[T]` | List of references |
+| `RefDict[K, V]` | Dict with reference values |
+| `ContextRef["name"]` | Context value reference |
+
+That's it. No `WeakRef`, `LazyRef`, `CircularRef`, etc. Frameworks can build those patterns on top of these primitives.
+
+### Compatibility First
+
+Must work with existing tools:
+- `get_type_hints()` — Standard introspection
+- `get_origin()`, `get_args()` — Generic decomposition
+- mypy, pyright — Type checker compatibility
+- dataclasses, attrs, pydantic — Framework integration
+
+## What graph-refs Is Not
+
+### Not a Validation Library
+
+No runtime type checking:
+```python
+# graph-refs does NOT do this
+subnet = Subnet(network="wrong-type")  # No runtime error
+```
+
+Validation belongs in frameworks or type checkers, not in type markers.
+
+### Not a Serialization Library
+
+No JSON/YAML output:
+```python
+# graph-refs does NOT do this
+subnet.to_json()  # No such method
+```
+
+Serialization is domain-specific. A CloudFormation reference serializes differently than a Kubernetes reference.
+
+### Not a Graph Database
+
+No query or traversal API:
+```python
+# graph-refs does NOT do this
+graph.find_all(Subnet).where(network=MyNetwork)
+```
+
+Graph operations belong in frameworks that manage the full object graph.
+
 ## Relationship to Existing Work
 
 | Foundation | Relationship |
@@ -347,9 +414,9 @@ role_arn: Attr[Role, "Arn"] = MyRole.Arn  # Serializes to {"GetAtt": ["MyRole", 
 | PEP 586 (Literal) | Enables `Attr[T, Literal["name"]]` |
 | PEP 681 (dataclass_transform) | Type checker support for custom decorators |
 
-## Future Directions
+## Open Questions
 
-These are open questions that would need community input if pursuing stdlib inclusion:
+Design questions that could benefit from community feedback:
 
 1. **Variance**: Should `Ref[T]` be covariant, contravariant, or invariant? Covariant makes the most sense (a `Ref[Dog]` is a `Ref[Animal]`), but this needs validation.
 

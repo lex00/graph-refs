@@ -227,7 +227,7 @@ class RefInfo:
 
 ## Design Philosophy
 
-See [PHILOSOPHY.md](PHILOSOPHY.md) for the design principles behind this library.
+See [docs/RATIONALE.md](docs/RATIONALE.md) for design principles and rationale.
 
 ## Related Work
 
