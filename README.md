@@ -77,6 +77,13 @@ class Subnet:
 subnet = Subnet(network=MyBucket)  # Error: expected Network, got Bucket
 ```
 
+### Demo
+
+See [`examples/demo.py`](examples/demo.py) for a working example that demonstrates:
+- Reference extraction from type annotations
+- Dependency graph computation
+- How frameworks build on top of graph-refs
+
 ## Use Cases
 
 ### Infrastructure-as-Code

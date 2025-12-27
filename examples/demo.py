@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Working Demo: What graph-refs Can Do Today
+"""Demo: What graph-refs Can Do Today
 
 This example demonstrates the CURRENT capabilities of graph-refs,
 with comments explaining what additional tooling could enable.
 
-Run with: python examples/working_demo.py
+Run with: python examples/demo.py
 """
 
 from dataclasses import dataclass, field
